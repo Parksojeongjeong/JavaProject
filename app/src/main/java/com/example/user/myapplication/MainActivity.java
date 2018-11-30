@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -48,22 +49,29 @@ public class MainActivity extends AppCompatActivity {
         parent_layout = (LinearLayout) findViewById(R.id.parent_layout);
         layout = (LinearLayout) findViewById(R.id.createlayout);
         layout.setOrientation(LinearLayout.VERTICAL);
-        //layout.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL);
+        layout.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL);
 
         layout2 = new LinearLayout(this);
         layout2.setOrientation(LinearLayout.HORIZONTAL);
+        layout2.setGravity(Gravity.CENTER);
         layout3 = new LinearLayout(this);
         layout3.setOrientation(LinearLayout.HORIZONTAL);
+        layout3.setGravity(Gravity.CENTER);
         layout4 = new LinearLayout(this);
         layout4.setOrientation(LinearLayout.HORIZONTAL);
+        layout4.setGravity(Gravity.CENTER);
         layout5 = new LinearLayout(this);
         layout5.setOrientation(LinearLayout.HORIZONTAL);
+        layout5.setGravity(Gravity.CENTER);
         layout6 = new LinearLayout(this);
         layout6.setOrientation(LinearLayout.HORIZONTAL);
+        layout6.setGravity(Gravity.CENTER);
         layout7 = new LinearLayout(this);
         layout7.setOrientation(LinearLayout.HORIZONTAL);
+        layout7.setGravity(Gravity.CENTER);
         layout8 = new LinearLayout(this);
         layout8.setOrientation(LinearLayout.HORIZONTAL);
+        layout8.setGravity(Gravity.CENTER);
         btn_6202 = (Button) findViewById(R.id.btn_6202);
         btn_6202.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,27 +103,31 @@ public class MainActivity extends AppCompatActivity {
             b.setText("" + i);
             b.setId(i);
             b.setTextSize(10);
-            b.setLayoutParams(new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(2, 2, 2, 2);
+            b.setLayoutParams(params);
             layout8.addView(b);
             if (i % 2 == 1) {
                 TextView t = new TextView((this));
-                t.setText("   ");
                 layout8.addView(t);
             }
             btnarray[btncount] = b;
             pcstatus(btnarray[btncount], status[btncount]);
             btncount++;
+            b.setGravity(1);
         }
         for (; i > 30; i--) {
             Button b = new Button(this);
             b.setText("" + i);
             b.setId(i);
             b.setTextSize(10);
-            b.setLayoutParams(new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT));
+            b.setGravity(1);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(2, 2, 2, 2);
+            b.setLayoutParams(params);
             layout7.addView(b);
             if (i % 2 == 1) {
                 TextView t = new TextView((this));
-                t.setText("   ");
                 layout7.addView(t);
             }
             btnarray[btncount] = b;
@@ -127,11 +139,13 @@ public class MainActivity extends AppCompatActivity {
             b.setText("" + i);
             b.setId(i);
             b.setTextSize(10);
-            b.setLayoutParams(new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT));
+            b.setGravity(1);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(2, 2, 2, 2);
+            b.setLayoutParams(params);
             layout6.addView(b);
             if (i % 2 == 1) {
                 TextView t = new TextView((this));
-                t.setText("   ");
                 layout6.addView(t);
             }
             btnarray[btncount] = b;
@@ -143,11 +157,13 @@ public class MainActivity extends AppCompatActivity {
             b.setText("" + i);
             b.setId(i);
             b.setTextSize(10);
-            b.setLayoutParams(new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT));
+            b.setGravity(1);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(2, 2, 2, 2);
+            b.setLayoutParams(params);
             layout5.addView(b);
             if (i % 2 == 1) {
                 TextView t = new TextView((this));
-                t.setText("   ");
                 layout5.addView(t);
             }
             btnarray[btncount] = b;
@@ -159,11 +175,13 @@ public class MainActivity extends AppCompatActivity {
             b.setText("" + i);
             b.setId(i);
             b.setTextSize(10);
-            b.setLayoutParams(new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT));
+            b.setGravity(1);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(2, 2, 2, 2);
+            b.setLayoutParams(params);
             layout4.addView(b);
             if (i % 2 == 1) {
                 TextView t = new TextView((this));
-                t.setText("   ");
                 layout4.addView(t);
             }
             btnarray[btncount] = b;
@@ -175,11 +193,13 @@ public class MainActivity extends AppCompatActivity {
             b.setText("" + i);
             b.setId(i);
             b.setTextSize(10);
-            b.setLayoutParams(new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT));
+            b.setGravity(1);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(2, 2, 2, 2);
+            b.setLayoutParams(params);
             layout3.addView(b);
             if (i % 2 == 1) {
                 TextView t = new TextView((this));
-                t.setText("   ");
                 layout3.addView(t);
             }
             btnarray[btncount] = b;
@@ -191,11 +211,13 @@ public class MainActivity extends AppCompatActivity {
             b.setText("" + i);
             b.setId(i);
             b.setTextSize(10);
-            b.setLayoutParams(new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT));
+            b.setGravity(1);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(2, 2, 2, 2);
+            b.setLayoutParams(params);
             layout2.addView(b);
             if (i % 2 == 1) {
                 TextView t = new TextView((this));
-                t.setText("   ");
                 layout2.addView(t);
             }
             btnarray[btncount] = b;
