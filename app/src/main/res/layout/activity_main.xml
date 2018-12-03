@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <item android:id="@+id/action_camera"
+        android:title="Camera"
+        android:icon="@drawable/ic_action_camera"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_class"
+        android:title="Class"
+        app:showAsAction="always|withText" />
+    <item android:id="@+id/action_setting"
+        android:title="Setting"
+        app:showAsAction="ifRoom"/>
     <Button
         android:id="@+id/btn_6202"
         android:layout_width="250dp"
