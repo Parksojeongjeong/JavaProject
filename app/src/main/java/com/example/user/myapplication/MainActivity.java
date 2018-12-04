@@ -1,237 +1,151 @@
 package com.example.user.myapplication;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Handler;
 import android.os.Bundle;
-import android.text.Layout;
-import android.view.Gravity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.Random;
+public class MainActivity extends Activity implements View.OnClickListener{
 
-public class MainActivity extends AppCompatActivity {
+    private String TAG = "MainActivity";
 
-    int i = 42;
-    Button btnarray[];
-    int status[];
-    int btncount = 0;
-    Button btn_6202;
-    Button seabar2;
-    LinearLayout layout;
-    LinearLayout parent_layout;
-    LinearLayout layout2;
-    LinearLayout layout3;
-    LinearLayout layout4;
-    LinearLayout layout5;
-    LinearLayout layout6;
-    LinearLayout layout7;
-    LinearLayout layout8;
+    private Context mContext = MainActivity.this;
+
+    private ViewGroup mainLayout;   //사이드 나왔을때 클릭방지할 영역
+    private ViewGroup viewLayout;   //전체 감싸는 영역
+    private ViewGroup sideLayout;   //사이드바만 감싸는 영역
+
+    private Boolean isMenuShow = false;
+    private Boolean isExitFlag = false;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        Random rnd = new Random();
-
-        btnarray = new Button[42];
-        status = new int[42];
-        for (int i=0; i<42; i++){
-            status[i] = rnd.nextInt(2);
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+            return true;
         }
+        return super.onKeyDown(keyCode, event);
+    }
 
-        parent_layout = (LinearLayout) findViewById(R.id.parent_layout);
-        layout = (LinearLayout) findViewById(R.id.createlayout);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL);
+    @Override
+    public void onBackPressed() {
 
-        layout2 = new LinearLayout(this);
-        layout2.setOrientation(LinearLayout.HORIZONTAL);
-        layout2.setGravity(Gravity.CENTER);
-        layout3 = new LinearLayout(this);
-        layout3.setOrientation(LinearLayout.HORIZONTAL);
-        layout3.setGravity(Gravity.CENTER);
-        layout4 = new LinearLayout(this);
-        layout4.setOrientation(LinearLayout.HORIZONTAL);
-        layout4.setGravity(Gravity.CENTER);
-        layout5 = new LinearLayout(this);
-        layout5.setOrientation(LinearLayout.HORIZONTAL);
-        layout5.setGravity(Gravity.CENTER);
-        layout6 = new LinearLayout(this);
-        layout6.setOrientation(LinearLayout.HORIZONTAL);
-        layout6.setGravity(Gravity.CENTER);
-        layout7 = new LinearLayout(this);
-        layout7.setOrientation(LinearLayout.HORIZONTAL);
-        layout7.setGravity(Gravity.CENTER);
-        layout8 = new LinearLayout(this);
-        layout8.setOrientation(LinearLayout.HORIZONTAL);
-        layout8.setGravity(Gravity.CENTER);
-        btn_6202 = (Button) findViewById(R.id.btn_6202);
-        btn_6202.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if(isMenuShow){
+            closeMenu();
+        }else{
 
-                layout.addView(layout2);
-                layout.addView(layout3);
-                layout.addView(layout4);
-                layout.addView(layout5);
-                layout.addView(layout6);
-                layout.addView(layout7);
-                layout.addView(layout8);
+            if(isExitFlag){
+                finish();
+            } else {
 
-
-                setContentView(parent_layout);
-
-                layout.setVisibility(View.VISIBLE);
-
-                LinearLayout.LayoutParams miss = (LinearLayout.LayoutParams) btn_6202.getLayoutParams();
-                miss.bottomMargin=0;
-                miss.topMargin=0;
-
-                btn_6202.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80));
-//                btn_6202.startAnimation(animation);
+                isExitFlag = true;
+                Toast.makeText(this, "뒤로가기를 한번더 누르시면 앱이 종료됩니다.",  Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        isExitFlag = false;
+                    }
+                }, 2000);
             }
-        });
-        for (; i > 36; i--) {
-            Button b = new Button(this);
-            b.setText("" + i);
-            b.setId(i);
-            b.setTextSize(10);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(2, 2, 2, 2);
-            b.setLayoutParams(params);
-            layout8.addView(b);
-            if (i % 2 == 1) {
-                TextView t = new TextView((this));
-                layout8.addView(t);
-            }
-            btnarray[btncount] = b;
-            pcstatus(btnarray[btncount], status[btncount]);
-            btncount++;
-            b.setGravity(1);
-        }
-        for (; i > 30; i--) {
-            Button b = new Button(this);
-            b.setText("" + i);
-            b.setId(i);
-            b.setTextSize(10);
-            b.setGravity(1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(2, 2, 2, 2);
-            b.setLayoutParams(params);
-            layout7.addView(b);
-            if (i % 2 == 1) {
-                TextView t = new TextView((this));
-                layout7.addView(t);
-            }
-            btnarray[btncount] = b;
-            pcstatus(btnarray[btncount], status[btncount]);
-            btncount++;
-        }
-        for (; i > 24; i--) {
-            Button b = new Button(this);
-            b.setText("" + i);
-            b.setId(i);
-            b.setTextSize(10);
-            b.setGravity(1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(2, 2, 2, 2);
-            b.setLayoutParams(params);
-            layout6.addView(b);
-            if (i % 2 == 1) {
-                TextView t = new TextView((this));
-                layout6.addView(t);
-            }
-            btnarray[btncount] = b;
-            pcstatus(btnarray[btncount], status[btncount]);
-            btncount++;
-        }
-        for (; i > 18; i--) {
-            Button b = new Button(this);
-            b.setText("" + i);
-            b.setId(i);
-            b.setTextSize(10);
-            b.setGravity(1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(2, 2, 2, 2);
-            b.setLayoutParams(params);
-            layout5.addView(b);
-            if (i % 2 == 1) {
-                TextView t = new TextView((this));
-                layout5.addView(t);
-            }
-            btnarray[btncount] = b;
-            pcstatus(btnarray[btncount], status[btncount]);
-            btncount++;
-        }
-        for (; i > 12; i--) {
-            Button b = new Button(this);
-            b.setText("" + i);
-            b.setId(i);
-            b.setTextSize(10);
-            b.setGravity(1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(2, 2, 2, 2);
-            b.setLayoutParams(params);
-            layout4.addView(b);
-            if (i % 2 == 1) {
-                TextView t = new TextView((this));
-                layout4.addView(t);
-            }
-            btnarray[btncount] = b;
-            pcstatus(btnarray[btncount], status[btncount]);
-            btncount++;
-        }
-        for (; i > 6; i--) {
-            Button b = new Button(this);
-            b.setText("" + i);
-            b.setId(i);
-            b.setTextSize(10);
-            b.setGravity(1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(2, 2, 2, 2);
-            b.setLayoutParams(params);
-            layout3.addView(b);
-            if (i % 2 == 1) {
-                TextView t = new TextView((this));
-                layout3.addView(t);
-            }
-            btnarray[btncount] = b;
-            pcstatus(btnarray[btncount], status[btncount]);
-            btncount++;
-        }
-        for (; i > 0; i--) {
-            Button b = new Button(this);
-            b.setText("" + i);
-            b.setId(i);
-            b.setTextSize(10);
-            b.setGravity(1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(70, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(2, 2, 2, 2);
-            b.setLayoutParams(params);
-            layout2.addView(b);
-            if (i % 2 == 1) {
-                TextView t = new TextView((this));
-                layout2.addView(t);
-            }
-            btnarray[btncount] = b;
-            pcstatus(btnarray[btncount], status[btncount]);
-            btncount++;
         }
     }
 
-    public void pcstatus(Button b, int i){
-        if (i == 0){
-            b.setBackgroundColor(Color.rgb(183,183,183));
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        init();
+
+        addSideView();  //사이드바 add
+    }
+
+    private void init(){
+
+        findViewById(R.id.btn_menu).setOnClickListener(this);
+
+        mainLayout = findViewById(R.id.id_main);
+        viewLayout = findViewById(R.id.fl_silde);
+        sideLayout = findViewById(R.id.view_sildebar);
+
+    }
+
+    private void addSideView(){
+
+        SideBarView sidebar = new SideBarView(mContext);
+        sideLayout.addView(sidebar);
+
+        viewLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        sidebar.setEventListener(new SideBarView.EventListener() {
+
+            @Override
+            public void btnCancel() {
+                Log.e(TAG, "btnCancel");
+                closeMenu();
+            }
+
+            @Override
+            public void btnLevel1() {
+                Log.e(TAG, "btnLevel1");
+                Intent intent = new Intent(
+                        getApplicationContext(), // 현재 화면의 제어권자
+                        Layout_6202.class); // 다음 넘어갈 클래스 지정
+                startActivity(intent);
+                closeMenu();
+            }
+        });
+    }
+
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+
+            case R.id.btn_menu :
+
+                showMenu();
+                break;
         }
-        else{
-            b.setBackgroundColor(Color.rgb(247,208,236));
-        }
+    }
+
+    public void closeMenu(){
+
+        isMenuShow = false;
+        Animation slide = AnimationUtils.loadAnimation(mContext, R.anim.sidebar_hidden);
+        sideLayout.startAnimation(slide);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                viewLayout.setVisibility(View.GONE);
+                viewLayout.setEnabled(false);
+                mainLayout.setEnabled(true);
+            }
+        }, 450);
+    }
+
+    public void showMenu(){
+
+        isMenuShow = true;
+        Animation slide = AnimationUtils.loadAnimation(this, R.anim.sidebar_show);
+        sideLayout.startAnimation(slide);
+        viewLayout.setVisibility(View.VISIBLE);
+        viewLayout.setEnabled(true);
+        mainLayout.setEnabled(false);
+        Log.e(TAG, "메뉴버튼 클릭");
     }
 }
